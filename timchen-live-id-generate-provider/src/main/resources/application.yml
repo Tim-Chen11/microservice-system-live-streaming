@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: timchen-live-id-generate-provider
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:8808/timchen_live_common?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: cxl123456
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+    qos-enable: false
+    qos-port: 44444
+  registry:
+    address: nacos://localhost:8848?namespace=timchen-live-test&&username=timchen&&password=cxl123456
+  protocol:
+    name: dubbo
+    port: -1

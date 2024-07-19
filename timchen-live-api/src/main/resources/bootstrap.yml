@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: timchen-live-api
+  cloud:
+    nacos:
+      username: timchen
+      password: cxl123456
+      discovery:
+        server-addr: localhost:8848
+        namespace: timchen-live-test
