@@ -3,11 +3,8 @@ package org.timchen.live.user.provider.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import jakarta.annotation.Resource;
-import org.apache.rocketmq.client.exception.MQBrokerException;
-import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.MQProducer;
 import org.apache.rocketmq.common.message.Message;
-import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.idea.timchen.live.framework.redis.starter.key.UserProviderCacheKeyBuilder;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.RedisOperations;
@@ -16,15 +13,15 @@ import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.timchen.live.common.interfaces.ConvertBeanUtils;
+import org.timchen.live.user.constants.CacheAsyncDeleteCode;
+import org.timchen.live.user.constants.UserProviderTopicNames;
+import org.timchen.live.user.dto.UserCacheAsyncDeleteDTO;
 import org.timchen.live.user.dto.UserDTO;
 import org.timchen.live.user.provider.dao.mapper.IUserMapper;
 import org.timchen.live.user.provider.dao.po.UserPO;
 import org.timchen.live.user.provider.service.IUserService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -65,7 +62,7 @@ public class UserServiceImpl implements IUserService {
         // No data in redis then get from mysql
         userDTO = ConvertBeanUtils.convert(userMapper.selectById(userId), UserDTO.class);
         if (userDTO != null) {
-            redisTemplate.opsForValue().set(key, userDTO,30, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(key, userDTO, 30, TimeUnit.MINUTES);
         }
         return userDTO;
     }
@@ -75,20 +72,28 @@ public class UserServiceImpl implements IUserService {
         if (userDTO == null || userDTO.getUserId() == null) {
             return false;
         }
-        userMapper.updateById(ConvertBeanUtils.convert(userDTO, UserPO.class));
+        int updateStatus = userMapper.updateById(ConvertBeanUtils.convert(userDTO, UserPO.class));
 
-        String key = userProviderCacheKeyBuilder.buildUserInfoKey(userDTO.getUserId());
-        redisTemplate.delete(key);
+        if (updateStatus > -1) {
+            String key = userProviderCacheKeyBuilder.buildUserInfoKey(userDTO.getUserId());
+            redisTemplate.delete(key);
 
-        try {
-            Message message = new Message();
-            message.setBody(JSON.toJSONString(userDTO).getBytes());
-            message.setTopic("user-update-cache");
-            // 1 means delay 1 second to send
-            message.setDelayTimeLevel(1);
-            mqProducer.send(message);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            UserCacheAsyncDeleteDTO userCacheAsyncDeleteDTO = new UserCacheAsyncDeleteDTO();
+            userCacheAsyncDeleteDTO.setCode(CacheAsyncDeleteCode.USER_INFO_DELETE.getCode());
+            Map<String, Object> jsonParam = new HashMap<>();
+            jsonParam.put("userId", userDTO.getUserId());
+            userCacheAsyncDeleteDTO.setJson(JSON.toJSONString(jsonParam));
+
+            try {
+                Message message = new Message();
+                message.setTopic(UserProviderTopicNames.CACHE_ASYNC_DELETE_TOPIC);
+                message.setBody(JSON.toJSONString(userCacheAsyncDeleteDTO).getBytes());
+                // 1 means delay 1 second to send
+                message.setDelayTimeLevel(1);
+                mqProducer.send(message);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         return true;
     }
@@ -131,15 +136,15 @@ public class UserServiceImpl implements IUserService {
         userIdMap.values().parallelStream().forEach(queryUserIdList -> {
             dbQueryResult.addAll(ConvertBeanUtils.convertList(userMapper.selectBatchIds(queryUserIdList), UserDTO.class));
         });
-        if(!CollectionUtils.isEmpty(dbQueryResult)) {
+        if (!CollectionUtils.isEmpty(dbQueryResult)) {
             //When huge amount of user go into a room, we need to get their info rapidly. So store them into redis
-            Map<String, UserDTO> saveCacheMap = dbQueryResult.stream().collect(Collectors.toMap(userDto -> userProviderCacheKeyBuilder.buildUserInfoKey(userDto.getUserId()),x->x));
+            Map<String, UserDTO> saveCacheMap = dbQueryResult.stream().collect(Collectors.toMap(userDto -> userProviderCacheKeyBuilder.buildUserInfoKey(userDto.getUserId()), x -> x));
             redisTemplate.opsForValue().multiSet(saveCacheMap);
             //pipeline batch transform, reduce network IO cost
             redisTemplate.executePipelined(new SessionCallback<Object>() {
                 @Override
                 public <K, V> Object execute(RedisOperations<K, V> operations) throws DataAccessException {
-                    for(String redisKey: saveCacheMap.keySet()){
+                    for (String redisKey : saveCacheMap.keySet()) {
                         operations.expire((K) redisKey, createRandomExpireTime(), TimeUnit.SECONDS);
                     }
                     return null;
@@ -150,7 +155,7 @@ public class UserServiceImpl implements IUserService {
         return userDTOList.stream().collect(Collectors.toMap(UserDTO::getUserId, userDTO -> userDTO));
     }
 
-    private int createRandomExpireTime(){
+    private int createRandomExpireTime() {
         int time = ThreadLocalRandom.current().nextInt(1000);
         return time + 60 * 30;
     }

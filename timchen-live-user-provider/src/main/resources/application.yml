@@ -4,12 +4,12 @@ spring:
   datasource:
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
     url: jdbc:shardingsphere:classpath:timchen-db-sharding.yaml
+#    this hikari config is only used for connect between application and shardingJDBC, the real pools between connection to the two DBs needed to be in the sharding.yaml
     hikari:
       pool-name: timchen-user-pool
-      minimum-idle: 15
-      maximum-pool-size: 300
-#      connection-init-sql: select 1
-      connection-timeout: 4000
+      minimum-idle: 1
+      maximum-pool-size: 50
+      connection-timeout: 30000
       max-lifetime: 600000
       idle-timeout: 60000
   data:
@@ -41,3 +41,8 @@ timchen:
     consumer:
       name-srv: 127.0.0.1:9876
       group-name: ${spring.application.name}
+# Used for check the DB pool connection
+#logging:
+#  level:
+#    com.zaxxer.hikari.HikariConfig: DEBUG
+#    com.zaxxer.hikari: TRACE

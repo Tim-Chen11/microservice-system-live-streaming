@@ -1,6 +1,7 @@
 package org.timchen.live.user.provider.dao.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -9,29 +10,24 @@ import java.util.Date;
 
 /**
  * @Author: Tim Chen
- * @Date: 15:57 2024-06-12
+ * @Date: 11:26 2024-07-19
  * @Description:
  */
-@TableName("t_user")
 @Data
-public class UserPO {
+@TableName("t_user_tag")
+public class UserTagPO {
 
     @TableId(type = IdType.INPUT)
     private Long userId;
 
-    private String nickName;
+    @TableField(value = "tag_info_01")
+    private Long tagInfo01;
 
-    private String trueName;
+    @TableField(value = "tag_info_02")
+    private Long tagInfo02;
 
-    private String avatar;
-
-    private Integer sex;
-
-    private Integer workCity;
-
-    private Integer bornCity;
-
-    private Date bornDate;
+    @TableField(value = "tag_info_03")
+    private Long tagInfo03;
 
     private Date createTime;
 
