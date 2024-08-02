@@ -91,7 +91,6 @@ public class IdGenerateServiceImpl implements IdGenerateService, InitializingBea
         }
 
         this.refreshLocalUnSeqId(localUnSeqIdBO);
-
         return returnId;
     }
 
@@ -208,6 +207,7 @@ public class IdGenerateServiceImpl implements IdGenerateService, InitializingBea
             updateResult = idGenerateMapper.updateNewIdCountAndVersion(idGeneratePO.getId(), idGeneratePO.getVersion());
             if (updateResult > 0) {
                 localIdBOHandler(idGeneratePO);
+                return;
             }
         }
 

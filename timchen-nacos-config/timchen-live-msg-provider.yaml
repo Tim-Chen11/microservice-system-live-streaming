@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: timchen-live-msg-provider
+  datasource:
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 200
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #访问主库 no slave needed so db in
+    url: jdbc:mysql://timchen.db:3306/timchen_live_msg?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: cxl123456
+  data:
+    redis:
+      port: 6379
+      host: timchen.db
+      lettuce:
+        pool:
+          min-idle: 10
+          max-idle: 20
+          max-active: 50
+
+timchen:
+  sms:
+    ccp:
+      smsServerIp: app.cloopen.com
+      port: 8883
+      accountSId: 2c94811c9035ff9f01910255ad262a1c
+      accountToken: 8f38ff003eb041ee8290db06460c57e7
+      appId: 2c94811c9035ff9f01910255aea32a23
+      templateId: 1
+      testPhone: 15170331193
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+    qos-enable: false
+    qos-port: 22222
+  registry:
+    address: nacos://timchen.nacos.com:8848?namespace=timchen-live-test&&username=timchen&&password=cxl123456
+  protocol:
+    name: dubbo
+    port: -1

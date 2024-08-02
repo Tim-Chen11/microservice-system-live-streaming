@@ -17,6 +17,11 @@
         <module>timchen-live-framework</module>
         <module>timchen-live-id-generate-interface</module>
         <module>timchen-live-id-generate-provider</module>
+        <module>timchen-live-gateway</module>
+        <module>timchen-live-msg-interface</module>
+        <module>timchen-live-msg-provider</module>
+        <module>timchen-live-account-interface</module>
+        <module>timchen-live-account-provider</module>
     </modules>
 
     <properties>
@@ -26,6 +31,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springboot.version>3.0.4</springboot.version>
         <lombok.version>1.18.32</lombok.version>
+        <dubbo.version>3.2.0-beta.3</dubbo.version>
+        <spring-cloud-boostrap.version>3.0.2</spring-cloud-boostrap.version>
+        <arthus.zip.address>D:\code\timchen-live-app-folder</arthus.zip.address>
     </properties>
 
     <parent>

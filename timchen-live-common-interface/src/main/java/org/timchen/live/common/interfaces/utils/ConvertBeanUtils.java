@@ -1,4 +1,4 @@
-package org.timchen.live.common.interfaces;
+package org.timchen.live.common.interfaces.utils;
 
 import java.lang.reflect.Constructor;
 

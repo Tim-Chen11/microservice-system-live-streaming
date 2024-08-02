@@ -5,14 +5,20 @@
     <file url="file://$PROJECT_DIR$/chentime-live-user-provider/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/timchen-live-account-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/timchen-live-account-provider/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-common-interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-framework/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-framework/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-framework/timchen-live-framework-datasource-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-framework/timchen-live-framework-redis-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/timchen-live-framework/timchen-live-framework-web-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/timchen-live-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-id-generate-interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-id-generate-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/timchen-live-msg-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/timchen-live-msg-provider/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-user-interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-user-interface/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/timchen-live-user-provider/src/main/java" charset="UTF-8" />

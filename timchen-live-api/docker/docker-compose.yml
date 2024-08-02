@@ -1,0 +1,30 @@
+version: '3'
+services:
+  timchen-live-api-docker-1:
+    container_name: timchen-live-api-docker-1
+    image: 'timchen-live-api-docker:1.0.4'
+    ports:
+      - "8081:8081"
+    volumes:
+      - D:\code\timchen-live-app-folder\logs\timchen-live-api:/tmp/logs/timchen-live-api
+    environment:
+      - spring.cloud.nacos.discovery.ip=172.23.48.1
+      - TZ=Asia/Shanghai
+      - server.port=8081
+      - JAVA_OPTS=-DNACOS_USER=timchen -DNACOS_PWD=cxl123456 -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xms512m -Xmx512m -Xmn128m -Xss256k
+    extra_hosts:
+      - 'timchen.nacos.com:172.23.48.1'
+  timchen-live-api-docker-2:
+    container_name: timchen-live-api-docker-2
+    image: 'timchen-live-api-docker:1.0.4'
+    ports:
+      - "8082:8082"
+    volumes:
+      - D:\code\timchen-live-app-folder\logs\timchen-live-api:/tmp/logs/timchen-live-api
+    environment:
+      - spring.cloud.nacos.discovery.ip=172.23.48.1
+      - TZ=Asia/Shanghai
+      - server.port=8082
+      - JAVA_OPTS=-DNACOS_USER=timchen -DNACOS_PWD=cxl123456 -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xms512m -Xmx512m -Xmn128m -Xss256k
+    extra_hosts:
+      - 'timchen.nacos.com:172.23.48.1'

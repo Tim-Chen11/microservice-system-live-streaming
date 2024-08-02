@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
-import org.timchen.live.common.interfaces.ConvertBeanUtils;
+import org.timchen.live.common.interfaces.utils.ConvertBeanUtils;
 import org.timchen.live.user.constants.CacheAsyncDeleteCode;
 import org.timchen.live.user.constants.UserProviderTopicNames;
 import org.timchen.live.user.constants.UserTagFieldNameConstants;

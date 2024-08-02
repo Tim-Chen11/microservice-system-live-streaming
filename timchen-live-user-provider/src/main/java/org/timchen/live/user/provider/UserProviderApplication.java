@@ -11,8 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.timchen.live.user.constants.UserTagsEnum;
 import org.timchen.live.user.dto.UserDTO;
+import org.timchen.live.user.dto.UserLoginDTO;
+import org.timchen.live.user.provider.service.IUserPhoneService;
 import org.timchen.live.user.provider.service.IUserService;
 import org.timchen.live.user.provider.service.IUserTagService;
+
 
 import java.util.concurrent.CountDownLatch;
 
@@ -40,43 +43,18 @@ public class UserProviderApplication implements CommandLineRunner {
     @Resource
     private IUserService userService;
 
+    @Resource
+    private IUserPhoneService userPhoneService;
+
     @Override
     public void run(String... args) throws Exception {
-//        Long userId = 1004L;
-//        UserDTO userDTO = userService.getByUserId(userId);
-//        userDTO.setNickName("test-nick-name");
-//        userService.updateUserInfo(userDTO);
-//
-//        System.out.println(userTagService.containTag(userId, UserTagsEnum.IS_OLD_USER));
-//        System.out.println(userTagService.setTag(userId, UserTagsEnum.IS_OLD_USER));
-//        System.out.println(userTagService.containTag(userId, UserTagsEnum.IS_OLD_USER));
-//        System.out.println(userTagService.cancelTag(userId, UserTagsEnum.IS_OLD_USER));
-//        System.out.println(userTagService.containTag(userId, UserTagsEnum.IS_OLD_USER));
-
-
-
-//        System.out.println(userTagService.setTag(userId, UserTagsEnum.IS_RICH));
-//        System.out.println(userTagService.setTag(userId, UserTagsEnum.IS_RICH));
-
-//        System.out.println("is_rich:" + userTagService.containTag(userId, UserTagsEnum.IS_RICH));
-//        Thread.sleep(1000);
-//        System.out.println(userTagService.setTag(userId, UserTagsEnum.IS_VIP));
-//        System.out.println("is_vip:" + userTagService.containTag(userId, UserTagsEnum.IS_VIP));
-//        Thread.sleep(1000);
-//        System.out.println(userTagService.setTag(userId, UserTagsEnum.IS_OLD_USER));
-//        System.out.println("is_old:" + userTagService.containTag(userId, UserTagsEnum.IS_OLD_USER));
-//        System.out.println("------------------------------------------------");
-//        Thread.sleep(1000);
-//
-//        System.out.println(userTagService.cancelTag(userId, UserTagsEnum.IS_RICH));
-//        System.out.println(userTagService.cancelTag(userId, UserTagsEnum.IS_RICH));
-//        System.out.println("is_rich:" + userTagService.containTag(userId, UserTagsEnum.IS_RICH));
-//        Thread.sleep(1000);
-//        System.out.println(userTagService.cancelTag(userId, UserTagsEnum.IS_VIP));
-//        System.out.println("is_vip:" + userTagService.containTag(userId, UserTagsEnum.IS_VIP));
-//        Thread.sleep(1000);
-//        System.out.println(userTagService.cancelTag(userId, UserTagsEnum.IS_OLD_USER));
-//        System.out.println("is_old:" + userTagService.containTag(userId, UserTagsEnum.IS_OLD_USER));
+//        String phone = "17789829049";
+//        UserLoginDTO userLoginDTO = userPhoneService.login(phone);
+//        System.out.println(userLoginDTO);
+//        System.out.println(userPhoneService.queryByUserId(userLoginDTO.getUserId()));
+//        System.out.println(userPhoneService.queryByUserId(userLoginDTO.getUserId()));
+//        System.out.println(userPhoneService.queryByPhone(phone));
+//        System.out.println(userPhoneService.queryByPhone(phone));
 
     }
 }

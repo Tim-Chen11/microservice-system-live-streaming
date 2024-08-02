@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.timchen.live.id.generate.enums.IdTypeEnum;
 import org.timchen.live.id.generate.provider.service.IdGenerateService;
 
 import java.util.HashSet;
@@ -38,6 +39,9 @@ public class IdGenerateApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+//        Long userId = idGenerateService.getUnSeqId(IdTypeEnum.USER_UNSEQ_ID.getCode());
+//        System.out.println("dshfkjasdfhjskdfhkjsahfksjadf   "+ userId);
+
 //        HashSet<Long> idSet = new HashSet<>();
 //        for (int i = 0; i < 1500; i++) {
 //            Long id = idGenerateService.getSeqId(1);

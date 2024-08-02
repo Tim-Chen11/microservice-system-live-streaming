@@ -1,0 +1,12 @@
+dubbo:
+  application:
+    name: timchen-live-user-api-application
+    qos-enable: false
+    qos-port: 33333
+  registry:
+    address: nacos://timchen.nacos.com:8848?namespace=timchen-live-test&&username=timchen&&password=cxl123456
+  protocol:
+    port: -1
+server:
+  servlet:
+    context-path: /live/api

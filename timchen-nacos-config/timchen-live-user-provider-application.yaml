@@ -1,10 +1,12 @@
+#docker run container using "--add-host timchen.???.com:ip" for all the different host that need ip like nacos, rmq, redis, mysql
+#Edit the local hosts file in OS to map each host eg: 127.0.0.1 timchen.nacos.com  for local running/debugging
 spring:
   application:
     name: timchen-live-user-provider
   datasource:
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-    url: jdbc:shardingsphere:classpath:timchen-db-sharding.yaml
-#    this hikari config is only used for connect between application and shardingJDBC, the real pools between connection to the two DBs needed to be in the sharding.yaml
+    url: jdbc:shardingsphere:nacos:timchen.nacos.com:8848:timchen-live-user-sharding.yaml?username=timchen&&password=cxl123456&&namespace=timchen-live-test
+    #    this hikari config is only used for connect between application and shardingJDBC, the real pools between connection to the two DBs needed to be in the sharding.yaml
     hikari:
       pool-name: timchen-user-pool
       minimum-idle: 1
@@ -15,7 +17,7 @@ spring:
   data:
     redis:
       port: 6379
-      host: 127.0.0.1
+      host: timchen.db
       lettuce:
         pool:
           min-idle: 10
@@ -27,19 +29,20 @@ dubbo:
     qos-enable: false
     qos-port: 22222
   registry:
-    address: nacos://localhost:8848?namespace=timchen-live-test&&username=timchen&&password=cxl123456
+    address: nacos://timchen.nacos.com:8848?namespace=timchen-live-test&&username=timchen&&password=cxl123456
   protocol:
     name: dubbo
     port: -1
 timchen:
   rmq:
     producer:
-      name-srv: 127.0.0.1:9876
+      name-srv: timchen.rmq.com:9876
       group-name: ${spring.application.name}
       retry-times: 3
       send-time-out: 3000
+      application-name: ${spring.application.name}
     consumer:
-      name-srv: 127.0.0.1:9876
+      name-srv: timchen.rmq.com:9876
       group-name: ${spring.application.name}
 # Used for check the DB pool connection
 #logging:

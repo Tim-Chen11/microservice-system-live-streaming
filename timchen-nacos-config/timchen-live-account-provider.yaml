@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: timchen-live-account-provider
+  data:
+    redis:
+      port: 6379
+      host: timchen.db
+      lettuce:
+        pool:
+          min-idle: 10
+          max-idle: 20
+          max-active: 50
+dubbo:
+  application:
+    name: ${spring.application.name}
+    qos-enable: false
+  registry:
+    address: nacos://timchen.nacos.com:8848?namespace=timchen-live-test&&username=timchen&&password=cxl123456
+  protocol:
+    name: dubbo
+    port: -1
+#    threadpool: fixed
+#    dispatcher: execution
+#    threads: 500
+#    accepts: 500

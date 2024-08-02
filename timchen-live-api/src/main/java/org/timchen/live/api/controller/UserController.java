@@ -1,6 +1,9 @@
 package org.timchen.live.api.controller;
 
+import jakarta.annotation.Resource;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,11 +23,17 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
     @DubboReference
     private IUserRpc userRpc;
 
     @GetMapping("/getUserInfo")
     public UserDTO getUserInfo(Long userId){
+
+        UserDTO userDTO = userRpc.getByUserId(userId);
+        LOGGER.info(userDTO.toString());
+
         return userRpc.getByUserId(userId);
     }
 

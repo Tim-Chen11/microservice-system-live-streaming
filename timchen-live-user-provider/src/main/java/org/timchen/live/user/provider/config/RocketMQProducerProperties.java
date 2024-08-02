@@ -19,6 +19,7 @@ public class RocketMQProducerProperties {
     private String nameSrv;
     //group name
     private String groupName;
+    private  String applicationName;
     // message send failed retry times
     private int retryTimes;
     private int sendTimeOut;
