@@ -48,13 +48,13 @@ public class UserProviderApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        String phone = "17789829049";
-//        UserLoginDTO userLoginDTO = userPhoneService.login(phone);
-//        System.out.println(userLoginDTO);
-//        System.out.println(userPhoneService.queryByUserId(userLoginDTO.getUserId()));
-//        System.out.println(userPhoneService.queryByUserId(userLoginDTO.getUserId()));
-//        System.out.println(userPhoneService.queryByPhone(phone));
-//        System.out.println(userPhoneService.queryByPhone(phone));
+        String phone = "17789829049";
+        UserLoginDTO userLoginDTO = userPhoneService.login(phone);
+        System.out.println(userLoginDTO);
+        System.out.println(userPhoneService.queryByUserId(userLoginDTO.getUserId()));
+        System.out.println(userPhoneService.queryByUserId(userLoginDTO.getUserId()));
+        System.out.println(userPhoneService.queryByPhone(phone));
+        System.out.println(userPhoneService.queryByPhone(phone));
 
     }
 }

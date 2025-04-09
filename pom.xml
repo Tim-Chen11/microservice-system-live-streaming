@@ -22,6 +22,10 @@
         <module>timchen-live-msg-provider</module>
         <module>timchen-live-account-interface</module>
         <module>timchen-live-account-provider</module>
+        <module>timchen-live-im-core-server</module>
+        <module>timchen-live-im-interface</module>
+        <module>timchen-live-im-provider</module>
+        <module>timchen-live-im-core-server-interface</module>
     </modules>
 
     <properties>

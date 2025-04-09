@@ -41,7 +41,7 @@ public class IdGenerateApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        Long userId = idGenerateService.getUnSeqId(IdTypeEnum.USER_UNSEQ_ID.getCode());
 //        System.out.println("dshfkjasdfhjskdfhkjsahfksjadf   "+ userId);
-
+//
 //        HashSet<Long> idSet = new HashSet<>();
 //        for (int i = 0; i < 1500; i++) {
 //            Long id = idGenerateService.getSeqId(1);

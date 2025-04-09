@@ -8,3 +8,5 @@ spring:
       discovery:
         server-addr: localhost:8848
         namespace: timchen-live-test
+server:
+  port: 0

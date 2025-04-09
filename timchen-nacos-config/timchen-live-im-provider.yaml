@@ -1,0 +1,29 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: timchen-live-im-provider
+  data:
+    redis:
+      port: 6379
+      host: timchen.db
+      lettuce:
+        pool:
+          min-idle: 10
+          max-idle: 20
+          max-active: 50
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+    qos-enable: false
+  registry:
+    #docker启动的时候，注入host的配置
+    address: nacos://timchen.nacos.com:8848?namespace=timchen-live-test&&username=timchen&&password=cxl123456
+  protocol:
+    name: dubbo
+    port: -1
+    threadpool: fixed
+    dispatcher: execution
+    threads: 500
+    accepts: 500

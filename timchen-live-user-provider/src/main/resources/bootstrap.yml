@@ -20,3 +20,5 @@ spring:
   config:
     import:
       - optional:nacos:timchen-live-user-provider.yaml
+server:
+  port: 0

@@ -20,3 +20,5 @@ spring:
   config:
     import:
       - optional:nacos:timchen-live-msg-provider.yaml
+server:
+  port: -1

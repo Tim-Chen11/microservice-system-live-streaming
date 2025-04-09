@@ -6,6 +6,7 @@ spring:
       discovery:
         server-addr: timchen.nacos.com:8848
         namespace: timchen-live-test
+        enabled: false
       config:
         import-check:
           enabled: false
@@ -18,3 +19,5 @@ spring:
   config:
     import:
       - optional:nacos:timchen-live-account-provider.yaml
+server:
+  port: 0

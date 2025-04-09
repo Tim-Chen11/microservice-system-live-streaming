@@ -12,5 +12,6 @@
         <module>timchen-live-framework-datasource-starter</module>
         <module>timchen-live-framework-redis-starter</module>
         <module>timchen-live-framework-web-starter</module>
+        <module>timchen-live-framework-mq-starter</module>
     </modules>
 </project>

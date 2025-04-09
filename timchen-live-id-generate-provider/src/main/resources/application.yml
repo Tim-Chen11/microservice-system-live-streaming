@@ -16,4 +16,4 @@ dubbo:
     address: nacos://localhost:8848?namespace=timchen-live-test&&username=timchen&&password=cxl123456
   protocol:
     name: dubbo
-    port: -1
+    port: 0
